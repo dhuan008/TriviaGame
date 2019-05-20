@@ -1,12 +1,11 @@
-html, body{
+html, body, .container {
     height: 100vh;
-}
-
-/* Quiz Question Box */
-#quiz-box {
-    height: 90vh;
 }
 
 .pb-10 {
     padding-bottom: 15.5rem;
+}
+
+.h-90 {
+    height: 90%;
 }
