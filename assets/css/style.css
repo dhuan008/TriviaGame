@@ -1,11 +1,31 @@
-html, body, .container {
+html, body {
     height: 100vh;
 }
 
-.pb-10 {
-    padding-bottom: 15.5rem;
+body {
+    background: url(../images/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-.h-90 {
-    height: 90%;
+.text-green {
+    color: rgb(22, 198, 12);
+    /*color: rgb(19, 161, 14);*/
+}
+
+.bg-opaque {
+    background-color:rgba(204, 204, 204, 0.5);
+}
+
+.bg-opaque-dark {
+    background: rgba(41, 41, 41, 0.8);
+}
+
+.neon {
+    color: #D0F8FF;
+    text-shadow: 0 0 5px #A5F1FF, 0 0 10px #A5F1FF,
+                 0 0 20px #A5F1FF, 0 0 30px #A5F1FF,
+                 0 0 40px #A5F1FF;
 }
