@@ -43,6 +43,7 @@ var trivia = {
             var button = $('<button>');
             button.text(choiceArr[i]);
             button.attr('data-id', i);
+            button.addClass("btn btn-outline-light");
             $("#choices").append(button);
             $("#choices").append("<br>");
         }
