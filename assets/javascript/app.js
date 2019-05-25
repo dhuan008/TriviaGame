@@ -1,6 +1,6 @@
 // Global Variables
 // Time for each question
-var questionTime = 5;
+var questionTime = 10;
 
 // Trivia Game Object
 var trivia = {
