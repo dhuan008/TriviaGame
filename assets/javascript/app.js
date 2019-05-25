@@ -1,6 +1,6 @@
 // Global Variables
 // Time for each question
-var questionTime = 10;
+var questionTime = 5;
 
 // Trivia Game Object
 var trivia = {
@@ -39,6 +39,7 @@ var trivia = {
     // Prepares the screen and starts the game
     start: function () {
         trivia.reset();
+        $("#results").empty().addClass("d-none");
         $("#start").hide();
         $("#toShow").removeClass("d-none");
         trivia.ask();
@@ -93,13 +94,13 @@ var trivia = {
             var unanswered = trivia.questions.length - (trivia.correct + trivia.wrong);
 
             // Add data to results
-            results.addClass("text-center mb-3");
+            results.addClass("text-center mb-3 py-3 border border-light");
             results.append("Correct: " + trivia.correct);
             results.append("<br>Wrong: " + trivia.wrong);
             results.append("<br>Unanswered: " + unanswered );
             
-            // Append results above start
-            $("#start").prepend(results);
+            // Append results to results div and show
+            $("#results").append(results).removeClass("d-none");
 
             // Change start button text to restart and show it
             $("#start .btn").text("Restart");
