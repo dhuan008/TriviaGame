@@ -39,18 +39,19 @@ var trivia = {
     // Prepares the screen and starts the game
     start: function () {
         trivia.reset();
-        $("#results").empty().addClass("d-none");
         $("#start").hide();
         $("#toShow").removeClass("d-none");
         trivia.ask();
     },
 
-    // Reinitializes the game variables
+    // Reinitializes the game variables and removes previous game results
     reset: function () {
         trivia.userChoice = "";
         trivia.current = 0;
         trivia.correct = 0;
         trivia.wrong = 0;
+        // Removes previous game results and hides
+        $("#results").empty().addClass("d-none");
     },
 
     ask: function () {
@@ -161,11 +162,6 @@ var trivia = {
             // Clear Game Box
             trivia.clear();
 
-            // console.log("Evaluate: Correct: " + trivia.correct);
-            // console.log("Evaluate: Question: " + trivia.thisItem.question);
-            // console.log("Evaluate: Selected: " + trivia.thisItem.choices[trivia.userChoice]);
-            // console.log("Evaluate: Answer: " + trivia.thisItem.answer);
-
             // Displays correct
             $("#choices").text("Correct!");
         }
@@ -175,11 +171,6 @@ var trivia = {
 
             // Clear Game Box
             trivia.clear();
-
-            // console.log("Evaluate: Wrong: " + trivia.wrong);
-            // console.log("Evaluate: Question: " + trivia.questions[trivia.current].question);
-            // console.log("Evaluate: Selected: " + trivia.questions[trivia.current].choices[trivia.userChoice]);
-            // console.log("Evaluate: Answer: " + trivia.questions[trivia.current].answer);
 
             // Displays the correct answer
             $("#choices").html("Wrong! The correct answer was <br><br><b><h4>" + trivia.thisItem.choices[trivia.thisItem.answer] + "</h4></b>");
