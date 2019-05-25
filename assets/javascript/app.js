@@ -48,11 +48,8 @@ var trivia = {
     },
 
     ask: function () {
-        console.log("Ask: entered");
-
         // Updates variable to store current question object
         trivia.thisItem = trivia.questions[trivia.current];
-        console.log("thisItem: " + trivia.thisItem);
 
         // Checks if there are still questions remaining in the array
         if (trivia.questions[trivia.current]) {
@@ -63,11 +60,9 @@ var trivia = {
 
             // Displays the current question
             $("#question").html(trivia.thisItem.question);
-            console.log("Ask: Current Question: " + trivia.thisItem.question);
 
             // Array to hold options to choose from
             var choiceArr = trivia.thisItem.choices;
-            //console.log("ask: " + choiceArr);
 
             // Creates the options with attributes and displays them
             for (var i = 0; i < choiceArr.length; i++) {
@@ -81,14 +76,10 @@ var trivia = {
 
             // Counts down every 1 sec by calling timer method
             trivia.timerID = setInterval(trivia.timer, 1000);
-            console.log("TimerID: " + trivia.timerID);
         }
         else {
-            console.log("Ask: Else entered");
             var results = $('<div>');
-            console.log("Array Length: " + trivia.questions.length);
-            console.log("Correct: " + trivia.correct);
-            console.log("Wrong: " + trivia.wrong);
+
             var temp = trivia.questions.length - (trivia.correct + trivia.wrong);
 
             results.text("Unanswered: " );
@@ -109,7 +100,6 @@ var trivia = {
         setTimeout(function () {
             trivia.clear();
             trivia.ask();
-            console.log("Next: Ask called")
         }, 3000)
     },
 
@@ -121,6 +111,7 @@ var trivia = {
         // If timer runs out got to the next question immediately else update time left display
         if (trivia.timeLeft <= 0) {
             setTimeout(function () {
+                $("#choices").html("The correct answer was <b><h4>" + trivia.thisItem.choices[trivia.thisItem.answer] + "</h4></b>");
                 trivia.next();
             });
         }
@@ -132,30 +123,42 @@ var trivia = {
 
     evaluate: function () {
         if (trivia.userChoice == trivia.thisItem.answer) {
+            // Increment number of correct answers
             trivia.correct++;
+
+            // Clear Game Box
+            trivia.clear();
+            
             console.log("Evaluate: Correct: " + trivia.correct);
             console.log("Evaluate: Question: " + trivia.thisItem.question);
             console.log("Evaluate: Selected: " + trivia.thisItem.choices[trivia.userChoice]);
             console.log("Evaluate: Answer: " + trivia.thisItem.answer);
+            // Displays correct
             $("#choices").text("Correct!");
         }
         else {
+            // Increment number of wrong answers
             trivia.wrong++;
+
+            // Clear Game Box
+            trivia.clear();
+
             console.log("Evaluate: Wrong: " + trivia.wrong);
             console.log("Evaluate: Question: " + trivia.questions[trivia.current].question);
             console.log("Evaluate: Selected: " + trivia.questions[trivia.current].choices[trivia.userChoice]);
             console.log("Evaluate: Answer: " + trivia.questions[trivia.current].answer);
-            $("#choices").text("Wrong! The correct answer was " + trivia.thisItem.choices[trivia.thisItem.answer]);
+            // Displays the correct answer
+            $("#choices").html("Wrong! The correct answer was <b><h4>" + trivia.thisItem.choices[trivia.thisItem.answer] + "</h4></b>");
         }
+        // Gets the next question
         trivia.next();
     },
 
+    // Clear Game Box
     clear: function () {
-        // Clear Game Box
         $("#timer").empty();
         $("#question").empty();
         $("#choices").empty();
-        
     }
 };
 
@@ -167,7 +170,6 @@ $(function () {
 
     $("#choices").on("click", "button", function () {
         trivia.userChoice = $(this).data("id");
-        console.log(trivia.userChoice);
 
         trivia.evaluate();
         
