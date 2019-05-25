@@ -20,22 +20,32 @@
 <body>
 
     <div class="container h-100 pt-5">
-        <!-- Quiz Box -->
-        <div
-            class="row h-85 flex-column mx-5 justify-content-center align-items-center rounded-circle bg-opaque-dark text-white min-height">
-            <!-- Trivia Title -->
-            <div class="col-auto mb-4">
-                <h1 class="font-text-me-one neon">Trivia Game</h1>
-            </div>
-            <!-- Start Button -->
-            <div class="col-auto" id="start">
-                <button type="button" class="btn btn-outline-light">Start</button>
-            </div>
-            <!-- Game Box -->
-            <div class="col-auto bg-success d-none" id="toShow">
-                <div class="row-auto bg-danger">
+        <!-- Quiz Box Wrapper -->
+        <div class="row h-85 flex-column mx-5 justify-content-center align-items-center rounded-circle bg-opaque-dark text-white">
+
+            <!-- Quiz Content -->
+            <div class="col-auto">
+
+                <!-- Trivia Title -->
+                <div class="row-auto">
+                    <div class="col-auto">
+                        <h1 class="font-text-me-one text-center neon">Trivia Game</h1>
+                    </div>
+                </div>
+
+                <!-- Start Button -->
+                <div class="row-auto" id="start">
+                    <div class="col-auto text-center">
+                        <button type="button" class="btn btn-outline-light">Start</button>
+                    </div>
+                </div>
+
+                <!-- Game Box -->
+                <div class="row-auto d-none" id="toShow">
                     <!-- Timer -->
-                    <div class="col-auto text-center" id="timer"><p>Timer</p></div>
+                    <div class="col-auto text-center" id="timer">
+                        <p>Timer</p>
+                    </div>
                     <!-- Question -->
                     <div class="col-auto" id="question"></div>
                     <!-- Choices -->
@@ -45,8 +55,8 @@
                     <!-- Incorrect -->
                     <div class="col-auto" id="wrong"></div>
                 </div>
-            </div>
 
+            </div>
         </div>
 
         <!-- Quiz Options -->
