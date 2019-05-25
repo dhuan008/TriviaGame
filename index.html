@@ -21,7 +21,8 @@
 
     <div class="container h-100 pt-5">
         <!-- Quiz Box -->
-        <div class="row h-75 flex-column mx-5 justify-content-center align-items-center rounded-circle bg-opaque-dark text-white min-height">
+        <div
+            class="row h-85 flex-column mx-5 justify-content-center align-items-center rounded-circle bg-opaque-dark text-white min-height">
             <!-- Trivia Title -->
             <div class="col-auto mb-4">
                 <h1 class="font-text-me-one neon">Trivia Game</h1>
@@ -30,20 +31,26 @@
             <div class="col-auto" id="start">
                 <button type="button" class="btn btn-outline-light">Start</button>
             </div>
-            <!-- Timer -->
-            <div class="col-auto d-none" id="timer"></div>
-            <!-- Question -->
-            <div class="col-auto d-none mb-3" id="question"></div>
-            <!-- Choices -->
-            <div class="col-auto text-center min-height d-none" id="choices"></div>
-            <!-- Correct -->
-            <div class="col-auto d-none" id="correct"></div>
-            <!-- Incorrect -->
-            <div class="col-auto d-none" id="wrong"></div>
+            <!-- Game Box -->
+            <div class="col-auto bg-success d-none" id="toShow">
+                <div class="row-auto bg-danger">
+                    <!-- Timer -->
+                    <div class="col-auto text-center" id="timer"><p>Timer</p></div>
+                    <!-- Question -->
+                    <div class="col-auto" id="question"></div>
+                    <!-- Choices -->
+                    <div class="col-auto text-center" id="choices"></div>
+                    <!-- Correct -->
+                    <div class="col-auto" id="correct"></div>
+                    <!-- Incorrect -->
+                    <div class="col-auto" id="wrong"></div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Quiz Options -->
-        <div class="row h-25">
+        <div class="row h-15">
             <div class="col align-self-end font-text-me-one text-center rounded-top bg-opaque-dark" id="menu">
                 <h1 class="text-green">Menu</h1>
             </div>

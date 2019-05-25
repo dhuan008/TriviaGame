@@ -25,15 +25,18 @@ var trivia = {
 
     // Variables
     current: 0,
+    counter: 30,
 
     // Methods
     start: function () {
         $("#start").hide();
-        $("#timer").removeClass("d-none");
-        $("#question").removeClass("d-none");
-        $("#choices").toggleClass("d-none");
+        $("#toShow").removeClass("d-none");
+        // $("#timer").removeClass("d-none");
+        // $("#question").removeClass("d-none");
+        // $("#choices").toggleClass("d-none");
         this.ask();
     },
+
     ask: function () {
         $("#question").html(this.questions[this.current].question);
 
@@ -47,12 +50,20 @@ var trivia = {
             $("#choices").append(button);
             $("#choices").append("<br>");
         }
+    },
+    
+    next: function () {
+        this.current++;
+        // Timer
+    },
+
+    timer: function () {
+        this.counter--;
     }
 };
 
 // Shorthand document ready
 $(function () {
-    console.log("Document Ready");
     $("#start").on('click', function () {
         trivia.start();
     });
@@ -60,5 +71,6 @@ $(function () {
     $("#choices").on("click", "button", function () {
         var userChoice = $(this).data("id");
         console.log(userChoice);
+        
     })
 });
