@@ -24,41 +24,92 @@ var trivia = {
     }],
 
     // Variables
+    userChoice: "",
     current: 0,
-    counter: 30,
+    timeLeft: 30,
+    correct: 0,
+    wrong: 0,
+    timerID: "",
 
     // Methods
     start: function () {
         $("#start").hide();
         $("#toShow").removeClass("d-none");
-        // $("#timer").removeClass("d-none");
-        // $("#question").removeClass("d-none");
-        // $("#choices").toggleClass("d-none");
-        this.ask();
+        trivia.ask();
     },
 
     ask: function () {
-        $("#question").html(this.questions[this.current].question);
+        // Checks if there are still questions remaining in the array
+        if (trivia.questions[trivia.current]) {
+            // Displays time remaining
+            $("#timer").html("Time remaining: " + trivia.timeLeft + " seconds");
 
-        var choiceArr = this.questions[this.current].choices;
+            // Displays the current question
+            $("#question").html(trivia.questions[trivia.current].question);
 
-        for (var i = 0; i < choiceArr.length; i++) {
-            var button = $('<button>');
-            button.text(choiceArr[i]);
-            button.attr('data-id', i);
-            button.addClass("btn btn-outline-light");
-            $("#choices").append(button);
-            $("#choices").append("<br>");
+            // Array to hold options to choose from
+            var choiceArr = trivia.questions[trivia.current].choices;
+            //console.log("ask: " + choiceArr);
+
+            // Creates the options with attributes and displays them
+            for (var i = 0; i < choiceArr.length; i++) {
+                var button = $('<button>');
+                button.text(choiceArr[i]);
+                button.attr('data-id', i);
+                button.addClass("btn btn-outline-light m-1");
+                $("#choices").append(button);
+                $("#choices").append("<br>");
+            }
+
+            // Counts down every 1 sec by calling timer method
+            trivia.timerID = setInterval(trivia.timer, 1000);
+            console.log("TimerID: " + trivia.timerID);
+        }
+        else {
+            var temp = $('<div');
+            temp.text("Unanswered: " + trivia.questions.length - (trivia.correct - trivia.wrong));
+            $("#toShow").append(temp);
+
+            $("#start").text("Restart");
+            $("#start").show();
+        }
+
+    },
+
+    next: function () {
+        trivia.current++;
+        clearInterval(trivia.timerID);
+        trivia.timeLeft = 30;
+        // Ask the next question in 1 second
+        setTimeout(function () {
+            trivia.ask;
+        }, 1000)
+    },
+
+    // Keeps track of how much time left on a question
+    timer: function () {
+        // Decreases time every sec
+        trivia.timeLeft--;
+        console.log(trivia.timeLeft);
+        // If timer runs out got to the next question immediately else update time left display
+        if (trivia.timeLeft <= 0) {
+            setTimeout(function () {
+                trivia.next;
+            });
+        }
+        else {
+            // Displays time remaining
+            $("#timer").html("Time remaining: " + trivia.timeLeft + " seconds");
         }
     },
-    
-    next: function () {
-        this.current++;
-        // Timer
-    },
 
-    timer: function () {
-        this.counter--;
+    evalute: function () {
+        if (trivia.userChoice === trivia.questions[trivia.current].answer) {
+            trivia.correct++;
+        }
+        else {
+            trivia.wrong++;
+        }
     }
 };
 
@@ -69,8 +120,10 @@ $(function () {
     });
 
     $("#choices").on("click", "button", function () {
-        var userChoice = $(this).data("id");
-        console.log(userChoice);
-        
-    })
+        trivia.userChoice = $(this).data("id");
+        console.log(trivia.userChoice);
+
+        trivia.evalute();
+        trivia.next();
+    });
 });
