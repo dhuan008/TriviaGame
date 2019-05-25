@@ -15,6 +15,10 @@ body {
     /*color: rgb(19, 161, 14);*/
 }
 
+h4 {
+    color: rgb(22, 198, 12);
+}
+
 .font-text-me-one {
     font-family: 'Text Me One', sans-serif;
 }
