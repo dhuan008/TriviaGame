@@ -83,7 +83,7 @@ var trivia = {
         }
         // Else display the results of the quiz
         else {
-            // Hide the game box
+            // Hide the Game Box
             $("#toShow").addClass("d-none");
 
             // Div to hold results
@@ -94,7 +94,9 @@ var trivia = {
 
             // Add data to results
             results.addClass("text-center mb-3");
-            results.append("Unanswered: " + unanswered );
+            results.append("Correct: " + trivia.correct);
+            results.append("<br>Wrong: " + trivia.wrong);
+            results.append("<br>Unanswered: " + unanswered );
             
             // Append results above start
             $("#start").prepend(results);
@@ -121,7 +123,7 @@ var trivia = {
         }, 3000)
     },
 
-    // Resets timer
+    // Readies the timer for the next question
     resetTimer: function () {
         // Clears the previous timer
         clearInterval(trivia.timerID);
@@ -185,7 +187,7 @@ var trivia = {
         trivia.next();
     },
 
-    // Clear Game Box
+    // Empties the Game Box display
     clear: function () {
         $("#timer").empty();
         $("#question").empty();
