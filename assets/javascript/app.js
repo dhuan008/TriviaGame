@@ -34,9 +34,17 @@ var trivia = {
 
     // Methods
     start: function () {
+        trivia.reset();
         $("#start").hide();
         $("#toShow").removeClass("d-none");
         trivia.ask();
+    },
+
+    reset: function () {
+        trivia.userChoice = "";
+        trivia.current = 0;
+        trivia.correct = 0;
+        trivia.wrong = 0;
     },
 
     ask: function () {
@@ -60,9 +68,6 @@ var trivia = {
             // Array to hold options to choose from
             var choiceArr = trivia.thisItem.choices;
             //console.log("ask: " + choiceArr);
-
-            // Clear choices div
-            $("#choices").empty();
 
             // Creates the options with attributes and displays them
             for (var i = 0; i < choiceArr.length; i++) {
@@ -92,26 +97,26 @@ var trivia = {
     },
 
     next: function () {
-        trivia.current++;
-        console.log("Next: " + trivia.current);
         clearInterval(trivia.timerID);
+        trivia.clear();
+        trivia.current++;
         trivia.timeLeft = 30;
         // Ask the next question in 1 second
         setTimeout(function () {
             trivia.ask();
             console.log("Next: Ask called")
-        }, 1000)
+        }, 3000)
     },
 
     // Keeps track of how much time left on a question
     timer: function () {
         // Decreases time every sec
         trivia.timeLeft--;
-        console.log(trivia.timeLeft);
+
         // If timer runs out got to the next question immediately else update time left display
         if (trivia.timeLeft <= 0) {
             setTimeout(function () {
-                trivia.next;
+                trivia.next();
             });
         }
         else {
@@ -136,6 +141,14 @@ var trivia = {
             console.log("Evaluate: Answer: " + trivia.questions[trivia.current].answer);
         }
         trivia.next();
+    },
+
+    clear: function () {
+        // Clear Game Box
+        $("#timer").empty();
+        $("#question").empty();
+        $("#choices").empty();
+        
     }
 };
 
