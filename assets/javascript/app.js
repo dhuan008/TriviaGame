@@ -85,8 +85,13 @@ var trivia = {
         }
         else {
             console.log("Ask: Else entered");
-            var temp = $('<div>');
-            temp.text("Unanswered: " + trivia.questions.length - (trivia.correct - trivia.wrong));
+            var results = $('<div>');
+            console.log("Array Length: " + trivia.questions.length);
+            console.log("Correct: " + trivia.correct);
+            console.log("Wrong: " + trivia.wrong);
+            var temp = trivia.questions.length - (trivia.correct + trivia.wrong);
+
+            results.text("Unanswered: " );
             $("#toShow").addClass("d-none");
             $("#start").prepend(temp);
 
@@ -98,11 +103,11 @@ var trivia = {
 
     next: function () {
         clearInterval(trivia.timerID);
-        trivia.clear();
         trivia.current++;
         trivia.timeLeft = 30;
         // Ask the next question in 1 second
         setTimeout(function () {
+            trivia.clear();
             trivia.ask();
             console.log("Next: Ask called")
         }, 3000)
@@ -132,6 +137,7 @@ var trivia = {
             console.log("Evaluate: Question: " + trivia.thisItem.question);
             console.log("Evaluate: Selected: " + trivia.thisItem.choices[trivia.userChoice]);
             console.log("Evaluate: Answer: " + trivia.thisItem.answer);
+            $("#choices").text("Correct!");
         }
         else {
             trivia.wrong++;
@@ -139,6 +145,7 @@ var trivia = {
             console.log("Evaluate: Question: " + trivia.questions[trivia.current].question);
             console.log("Evaluate: Selected: " + trivia.questions[trivia.current].choices[trivia.userChoice]);
             console.log("Evaluate: Answer: " + trivia.questions[trivia.current].answer);
+            $("#choices").text("Wrong! The correct answer was " + trivia.thisItem.choices[trivia.thisItem.answer]);
         }
         trivia.next();
     },
