@@ -30,6 +30,7 @@ var trivia = {
     correct: 0,
     wrong: 0,
     timerID: "",
+    thisItem: "",
 
     // Methods
     start: function () {
@@ -39,17 +40,29 @@ var trivia = {
     },
 
     ask: function () {
+        console.log("Ask: entered");
+
+        // Updates variable to store current question object
+        trivia.thisItem = trivia.questions[trivia.current];
+        console.log("thisItem: " + trivia.thisItem);
+
         // Checks if there are still questions remaining in the array
         if (trivia.questions[trivia.current]) {
             // Displays time remaining
             $("#timer").html("Time remaining: " + trivia.timeLeft + " seconds");
 
+            console.log("Ask: Current Loop: " + trivia.current + "first if entered");
+
             // Displays the current question
-            $("#question").html(trivia.questions[trivia.current].question);
+            $("#question").html(trivia.thisItem.question);
+            console.log("Ask: Current Question: " + trivia.thisItem.question);
 
             // Array to hold options to choose from
-            var choiceArr = trivia.questions[trivia.current].choices;
+            var choiceArr = trivia.thisItem.choices;
             //console.log("ask: " + choiceArr);
+
+            // Clear choices div
+            $("#choices").empty();
 
             // Creates the options with attributes and displays them
             for (var i = 0; i < choiceArr.length; i++) {
@@ -66,11 +79,13 @@ var trivia = {
             console.log("TimerID: " + trivia.timerID);
         }
         else {
-            var temp = $('<div');
+            console.log("Ask: Else entered");
+            var temp = $('<div>');
             temp.text("Unanswered: " + trivia.questions.length - (trivia.correct - trivia.wrong));
-            $("#toShow").append(temp);
+            $("#toShow").addClass("d-none");
+            $("#start").prepend(temp);
 
-            $("#start").text("Restart");
+            $("#start .btn").text("Restart");
             $("#start").show();
         }
 
@@ -78,11 +93,13 @@ var trivia = {
 
     next: function () {
         trivia.current++;
+        console.log("Next: " + trivia.current);
         clearInterval(trivia.timerID);
         trivia.timeLeft = 30;
         // Ask the next question in 1 second
         setTimeout(function () {
-            trivia.ask;
+            trivia.ask();
+            console.log("Next: Ask called")
         }, 1000)
     },
 
@@ -103,13 +120,22 @@ var trivia = {
         }
     },
 
-    evalute: function () {
-        if (trivia.userChoice === trivia.questions[trivia.current].answer) {
+    evaluate: function () {
+        if (trivia.userChoice == trivia.thisItem.answer) {
             trivia.correct++;
+            console.log("Evaluate: Correct: " + trivia.correct);
+            console.log("Evaluate: Question: " + trivia.thisItem.question);
+            console.log("Evaluate: Selected: " + trivia.thisItem.choices[trivia.userChoice]);
+            console.log("Evaluate: Answer: " + trivia.thisItem.answer);
         }
         else {
             trivia.wrong++;
+            console.log("Evaluate: Wrong: " + trivia.wrong);
+            console.log("Evaluate: Question: " + trivia.questions[trivia.current].question);
+            console.log("Evaluate: Selected: " + trivia.questions[trivia.current].choices[trivia.userChoice]);
+            console.log("Evaluate: Answer: " + trivia.questions[trivia.current].answer);
         }
+        trivia.next();
     }
 };
 
@@ -123,7 +149,7 @@ $(function () {
         trivia.userChoice = $(this).data("id");
         console.log(trivia.userChoice);
 
-        trivia.evalute();
-        trivia.next();
+        trivia.evaluate();
+        
     });
 });
