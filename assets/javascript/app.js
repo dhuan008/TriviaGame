@@ -14,9 +14,9 @@ var trivia = {
         choices: ["Browser finds the document in quirky mode", "Browser stops working", "Browser crashes after showing the page"],
         answer: 0
     }, {
-        question: "How do we write comments in HTML?",
-        choices: ["<!-- -->", "/* */", "//", "</ />"],
-        answer: 0
+        question: "Which of the following is true of iframes?",
+        choices: ["Divides the page into two sections", "Is used to create ajax frame", "Helps include one webpage into another", "A video on a iPhone or iPod"],
+        answer: 2
     }, {
         question: "How many heading levels does HTML have?",
         choices: ["7", "6", "5", "1"],
@@ -28,7 +28,7 @@ var trivia = {
     }, {
         question: "All HTML tags come in a pair. True of False?",
         choices: ["True", "False"],
-        answer: 0
+        answer: 1
     }, {
         question: "How do you insert a copyright symbol on a browser page?",
         choices: ["&copy", "&#196", "&copyright"],
@@ -36,10 +36,10 @@ var trivia = {
     }, {
         question: "Can a single text link point to two different web pages?",
         choices: ["Yes", "No"],
-        answer: 0
+        answer: 1
     }, {
         question: "Default size for a text field is around _______ characters",
-        choices: ["14", "25", "12", "13"],
+        choices: ["14", "26", "12", "13"],
         answer: 3
     }, {
         question: "Can a HTML tag point to a different section on the same page?",
