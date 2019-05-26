@@ -4,6 +4,49 @@ var questionTime = 15;
 
 // Trivia Game Object
 var trivia = {
+    // Html Questions
+    htmlQuiz: [{
+        question: "Choose the correct tag for the largest heading in HTML",
+        choices: ["h6", "head", "h1", "h0"],
+        answer: 2
+    }, {
+        question: "What happens if the doctype is not included in the start of a HTML document?",
+        choices: ["Browser finds the document in quirky mode", "Browser stops working", "Browser crashes after showing the page"],
+        answer: 0
+    }, {
+        question: "How do we write comments in HTML?",
+        choices: ["<!-- -->", "/* */", "//", "</ />"],
+        answer: 0
+    }, {
+        question: "How many heading levels does HTML have?",
+        choices: ["7", "6", "5", "1"],
+        answer: 1
+    }, {
+        question: "What does HTML stand for?",
+        choices: ["Hyperlinks and Text Markup Language", "Hot Text Made Live", "HyperText Markup Language"],
+        answer: 2
+    }, {
+        question: "All HTML tags come in a pair. True of False?",
+        choices: ["True", "False"],
+        answer: 0
+    }, {
+        question: "How do you insert a copyright symbol on a browser page?",
+        choices: ["&copy", "&#196", "&copyright"],
+        answer: 0
+    }, {
+        question: "Can a single text link point to two different web pages?",
+        choices: ["Yes", "No"],
+        answer: 0
+    }, {
+        question: "Default size for a text field is around _______ characters",
+        choices: ["14", "25", "12", "13"],
+        answer: 3
+    }, {
+        question: "Can a HTML tag point to a different section on the same page?",
+        choices: ["No", "Yes"],
+        answer: 1
+    }],
+
     // Javascript questions
     javascriptQuiz: [{
         question: "In JavaScript, how can you get the total number of arguments passed to a function",
@@ -96,6 +139,16 @@ var trivia = {
                 trivia.quizLength = trivia.securityQuiz.length;
             }
         }
+        else if (trivia.quizType == "html") {
+            // Updates current quiz question object
+            trivia.thisItem = trivia.htmlQuiz[trivia.current];
+
+            // Only update quiz length once
+            if (trivia.current == 0) {
+                // Stores the quiz length
+                trivia.quizLength = trivia.htmlQuiz.length;
+            }
+        }
         else {
             // Updates current quiz question object
             trivia.thisItem = trivia.javascriptQuiz[trivia.current];
@@ -105,7 +158,7 @@ var trivia = {
                 // Stores the quiz length
                 trivia.quizLength = trivia.javascriptQuiz.length;
                 // If no quiz selected default JavaScript
-                $("#quizTitle").text("Javascript Quiz");
+                $("#quizTitle").text("JavaScript Quiz");
             }
         }
     },
@@ -160,6 +213,8 @@ var trivia = {
         }
         // Else display the results of the quiz
         else {
+            // Clear previous timer
+            clearInterval(trivia.timerID);
             trivia.displayResults();
         }
     },
@@ -268,10 +323,13 @@ var trivia = {
 
     setQuizTitle: function () {
         if (trivia.quizType == "security") {
-            $("#quizTitle").text("Computer Security Quiz");
+            $("#quizTitle").text("CyberSecurity Quiz");
         }
         else if (trivia.quizType == "javascript") {
-            $("#quizTitle").text("Javascript Quiz");
+            $("#quizTitle").text("JavaScript Quiz");
+        }
+        else if (trivia.quizType == "html") {
+            $("#quizTitle").text("HTML Quiz");
         }
 
     },
@@ -289,7 +347,7 @@ var trivia = {
 $(function () {
 
     // Start quiz when clicked
-    $("#start").on('click', function () {
+    $("#start button").on('click', function () {
         trivia.start();
     });
 
