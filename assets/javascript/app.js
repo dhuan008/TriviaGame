@@ -117,7 +117,7 @@ var trivia = {
             $("#timer").html("Time remaining: " + trivia.timeLeft + " seconds");
 
             // Displays the current question
-            $("#question").html(trivia.thisItem.question).addClass("text-center");
+            $("#question").html("<h5>" + trivia.thisItem.question + "</h5>").addClass("text-center");
 
             // Array to hold options to choose from
             var choiceArr = trivia.thisItem.choices;
@@ -207,8 +207,13 @@ var trivia = {
             });
         }
         else {
-            // Displays time remaining
-            $("#timer").html("Time remaining: " + trivia.timeLeft + " seconds");
+            if (trivia.timeLeft <= 5) {
+                $("#timer").html("Time remaining: <span>" + trivia.timeLeft + "</span> seconds");
+            }
+            else {
+                // Displays time remaining
+                $("#timer").html("Time remaining: " + trivia.timeLeft + " seconds");
+            }
         }
     },
 
