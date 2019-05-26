@@ -367,7 +367,7 @@ var trivia = {
 $(function () {
 
     // Start quiz when clicked
-    $("#start button").on('click', function () {
+    $("#start .btn").on('click', function () {
         trivia.start();
     });
 
