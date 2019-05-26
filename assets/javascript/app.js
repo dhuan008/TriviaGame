@@ -80,6 +80,7 @@ var trivia = {
     timerID: "",
     thisItem: "",
     quizLength: 0,
+    quizTitle: "Trivia Game",
 
     // Methods
     // Determines which quiz to take and updates question
@@ -263,6 +264,16 @@ var trivia = {
         trivia.next();
     },
 
+    setQuizTitle: function () {
+        if (trivia.quizType == "security") {
+            $("#quizTitle").text("Computer Security Quiz");
+        }
+        else if (trivia.quizType == "javascript") {
+            $("#quizTitle").text("Javascript Quiz");
+        }
+
+    },
+
     // Empties the Game Box display
     clear: function () {
         $("#timer").empty();
@@ -283,6 +294,7 @@ $(function () {
     // Select which quiz to take
     $("#menu").on("click", "button", function () {
         trivia.quizType = $(this).data("type");
+        trivia.setQuizTitle();
     });
 
     // Get user choice and evaluate it
