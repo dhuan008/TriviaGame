@@ -23,7 +23,27 @@ var trivia = {
         answer: 1
     }, {
         question: "JavaScript is an __________ language.",
-        choices: ["Server", "ISP", "compiled", "interpreted"],
+        choices: ["european", "ISP", "compiled", "interpreted"],
+        answer: 3
+    }, {
+        question: "If p is not defined, what would be the result of console.log(p)?",
+        choices: ["Zero", "Null", "Reference Error", "Undefined"],
+        answer: 2
+    }, {
+        question: "Which of the following is not a valid Javascript variable name?",
+        choices: ["_javaScript", "javaScript", "2java", "None of the above"],
+        answer: 2
+    }, {
+        question: "What is the alternative name for JavaScript?",
+        choices: ["LimeScript", "ECMAScript", "TypeScript", "CoffeeScript"],
+        answer: 1
+    }, {
+        question: "Which of the following correctly appends a value to the end of the JavaScript array",
+        choices: ["arr[arr.length]=value", "arr[arr.length+1]=value", "arr[arr.length-1]=value", "arr[arr.length] = new Array()"],
+        answer: 0
+    }, {
+        question: "What is the return value of a function without a return statement?",
+        choices: ["void", "It will throw a error", "-1", "Undefined"],
         answer: 3
     }],
 
@@ -177,11 +197,11 @@ var trivia = {
         // Increment current question
         trivia.current++;
 
-        // Ask the next question in 3 seconds
+        // Ask the next question in 2 seconds
         setTimeout(function () {
             trivia.clear();
             trivia.ask();
-        }, 3000)
+        }, 2000)
     },
 
     // Readies the timer for the next question
@@ -227,7 +247,7 @@ var trivia = {
             trivia.clear();
 
             // Displays correct
-            $("#choices").text("Correct!");
+            $("#choices").text("Correct!").addClass("h3 text-success");
         }
         else {
             // Increment number of wrong answers
@@ -247,7 +267,7 @@ var trivia = {
     clear: function () {
         $("#timer").empty();
         $("#question").empty();
-        $("#choices").empty();
+        $("#choices").empty().removeClass("h3 text-success");
     }
 };
 
