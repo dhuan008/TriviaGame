@@ -4,7 +4,29 @@ var questionTime = 5;
 
 // Trivia Game Object
 var trivia = {
-    questions: [{
+    javascriptQuiz: [{
+        question: "In JavaScript, how can you get the total number of arguements passed to a function",
+        choices: ["Using the args.length property", "Using the arguments.length property", "Using the arr.length property", "Using the object.length property"],
+        answer: 1
+    }, {
+        question: "The external JavaScript file must contain the script tag. True or false?",
+        choices: ["True", "False"],
+        answer: 1
+    }, {
+        question: "How are functions called in Javascript?",
+        choices: ["call myFunc();", "call function myFunc();", "myFunc();", "function myFunc();"],
+        answer: 2
+    }, {
+        question: "In JavaScript, what is the method used to remove whitespace from the beginning and end of any string?",
+        choices: ["strip()", "trim()", "cut()", "concat()"],
+        answer: 1
+    }, {
+        question: "JavaScript is an __________ language.",
+        choices: ["Server", "ISP", "compiled", "interpreted"],
+        answer: 3
+    }],
+
+    securityQuiz: [{
         question: "With DEP(Data Execution Prevention) defense enabled, which of the following becomes impossible?",
         choices: ["Overwriting the return address on the stack", "Injecting shellcode onto the stack and execute it by jumping to it", "Finding a useful gadget to jump to in Return Oriented Programming", "Overwriting a function pointer on the stack"],
         answer: 1
@@ -22,24 +44,53 @@ var trivia = {
         answer: 2
     }, {
         question: "How does a blind ROP attack determine if a code sequence contains the desired gadget?",
-        choices: ["It leverages feedback about wherther a server has crashed or not", "It learns the address of the gadget by obtaining a copy of the binary beforehand", "it guesses if the root password is 'password'", "It sends a blind plishing email to the target's users and obtians user access"],
+        choices: ["It leverages feedback about whether a server has crashed or not", "It learns the address of the gadget by obtaining a copy of the binary beforehand", "it guesses if the root password is 'password'", "It sends a blind plishing email to the target's users and obtians user access"],
         answer: 0
     }],
 
     // Variables
     userChoice: "",
+    quizType: "",
     current: 0,
     timeLeft: questionTime,
     correct: 0,
     wrong: 0,
     timerID: "",
     thisItem: "",
+    quizLength: 0,
 
     // Methods
+    // Determines which quiz to take
+    updateQuiz: function () {
+        
+        if (trivia.quizType == "security") {
+            // Updates current quiz question object
+            trivia.thisItem = trivia.securityQuiz[trivia.current];
+
+            // Only update quiz lenght once
+            if (trivia.current == 0) {
+                // Stores the quiz length
+                trivia.quizLength = trivia.securityQuiz.length;
+            }
+        }
+        else {
+            // Updates current quiz question object
+            trivia.thisItem = trivia.javascriptQuiz[trivia.current];
+
+            // Only update quiz lenght once
+            if (trivia.current == 0) {
+                // Stores the quiz length
+                trivia.quizLength = trivia.javascriptQuiz.length;
+            }
+        }
+
+    },
+
     // Prepares the screen and starts the game
     start: function () {
         trivia.reset();
         $("#start").hide();
+        $("#menu").hide();
         $("#toShow").removeClass("d-none");
         trivia.ask();
     },
@@ -55,12 +106,10 @@ var trivia = {
     },
 
     ask: function () {
-        // Updates variable to store current question object
-        // If here to determine which quiz to take
-        trivia.thisItem = trivia.questions[trivia.current];
+        trivia.updateQuiz();
 
         // Checks if there are still questions remaining in the array
-        if (trivia.questions[trivia.current]) {
+        if (trivia.thisItem) {
             // Displays time remaining
             $("#timer").html("Time remaining: " + trivia.timeLeft + " seconds");
 
@@ -90,22 +139,25 @@ var trivia = {
 
             // Div to hold results
             var results = $('<div>');
-            
+
             // Number of unanswered questions
-            var unanswered = trivia.questions.length - (trivia.correct + trivia.wrong);
+            var unanswered = trivia.quizLength - (trivia.correct + trivia.wrong);
 
             // Add data to results
             results.addClass("text-center mb-3 py-3 border border-light");
             results.append("Correct: " + trivia.correct);
             results.append("<br>Wrong: " + trivia.wrong);
-            results.append("<br>Unanswered: " + unanswered );
-            
+            results.append("<br>Unanswered: " + unanswered);
+
             // Append results to results div and show
             $("#results").append(results).removeClass("d-none");
 
             // Change start button text to restart and show it
             $("#start .btn").text("Restart");
             $("#start").show();
+
+            // Show quiz selector
+            $("#menu").show();
         }
 
     },
@@ -187,16 +239,23 @@ var trivia = {
     }
 };
 
+
 // Shorthand document ready
 $(function () {
+
     $("#start").on('click', function () {
         trivia.start();
     });
+
+    $("#menu").on("click", "button", function () {
+        trivia.quizType = $(this).data("type");
+        //console.log(trivia.quizType);
+    })
 
     $("#choices").on("click", "button", function () {
         trivia.userChoice = $(this).data("id");
 
         trivia.evaluate();
-        
+
     });
 });
