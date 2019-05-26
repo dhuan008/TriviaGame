@@ -341,6 +341,7 @@ var trivia = {
         trivia.next();
     },
 
+    // Changes title to match the quiz 
     setQuizTitle: function () {
         if (trivia.quizType == "security") {
             $("#quizTitle").text("CyberSecurity Quiz");
@@ -351,7 +352,6 @@ var trivia = {
         else if (trivia.quizType == "html") {
             $("#quizTitle").text("HTML Quiz");
         }
-
     },
 
     // Empties the Game Box display
