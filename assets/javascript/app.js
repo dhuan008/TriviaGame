@@ -104,6 +104,8 @@ var trivia = {
             if (trivia.current == 0) {
                 // Stores the quiz length
                 trivia.quizLength = trivia.javascriptQuiz.length;
+                // If no quiz selected default JavaScript
+                $("#quizTitle").text("Javascript Quiz");
             }
         }
     },
@@ -300,7 +302,6 @@ $(function () {
     // Get user choice and evaluate it
     $("#choices").on("click", "button", function () {
         trivia.userChoice = $(this).data("id");
-
         trivia.evaluate();
     });
 });
