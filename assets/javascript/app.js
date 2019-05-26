@@ -93,7 +93,7 @@ var trivia = {
     // Into to Computer Security Questions
     securityQuiz: [{
         question: "With DEP(Data Execution Prevention) defense enabled, which of the following becomes impossible?",
-        choices: ["Overwriting the return address on the stack", "Injecting shellcode onto the stack and execute it by jumping to it", "Finding a useful gadget to jump to in Return Oriented Programming", "Overwriting a function pointer on the stack"],
+        choices: ["Overwriting the return address on the stack", "Injecting shellcode onto the stack and execute it by jumping to it", "Finding a useful gadget to jump to in Return Oriented Programming", "Overwriting a canary on the stack"],
         answer: 1
     }, {
         question: "What does the acronyom (BROP) stand for? (In the context of computer security)",
@@ -110,6 +110,26 @@ var trivia = {
     }, {
         question: "How does a blind ROP attack determine if a code sequence contains the desired gadget?",
         choices: ["It leverages feedback about whether a server has crashed or not", "It learns the address of the gadget by obtaining a copy of the binary beforehand", "it guesses if the root password is 'password'", "It sends a blind plishing email to the target's users and obtians user access"],
+        answer: 0
+    }, {
+        question: "What is the goal of a Control Flow Hijack?",
+        choices: ["Software Security", "Gain control of the instruction pointer(eip)", "Causes a program to crash or stop servicing clients", "ret2libc"],
+        answer: 1
+    }, {
+        question: "Which of the following is not a network security defense",
+        choices: ["Ingress filtering", "Firewalls", "Encryption", "Packet sniffing and spoofing"],
+        answer: 3
+    }, {
+        question: "Which of the following are common defenses against stack buffer overflow?",
+        choices: ["ASLR(Address Space Layout Randomization)", "MITM(Man in the Middle)", "Intrusion Detection Systems"],
+        answer: 0
+    }, {
+        question: "Why do blind ROP attacks remain effective against a web server despite having modern defenses enabled?",
+        choices: ["Web server forks a child process with the same address space layout every time to serve a new connection", "ASLR is disabled in each child process", "Stack canary sings", "Not running process as root"],
+        answer: 0
+    }, {
+        question: "Which programming languages are vulnerable to stack buffer overflow?",
+        choices: ["C", "Java", "Python", "Javascript"],
         answer: 0
     }],
 
@@ -210,11 +230,10 @@ var trivia = {
 
             // Counts down every 1 sec by calling timer method
             trivia.timerID = setInterval(trivia.timer, 1000);
+            console.log("Created timer: " + trivia.timerID);
         }
         // Else display the results of the quiz
         else {
-            // Clear previous timer
-            clearInterval(trivia.timerID);
             trivia.displayResults();
         }
     },
@@ -264,6 +283,7 @@ var trivia = {
 
     // Readies the timer for the next question
     resetTimer: function () {
+        console.log("closing P: " + trivia.timerID);
         // Clears the previous timer
         clearInterval(trivia.timerID);
 
