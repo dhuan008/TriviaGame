@@ -10,11 +10,6 @@ body {
     background-size: cover;
 }
 
-.text-green {
-    color: rgb(22, 198, 12);
-    /*color: rgb(19, 161, 14);*/
-}
-
 h4 {
     color: rgb(231, 72, 86);
 }
@@ -23,12 +18,8 @@ h4 {
     font-family: 'Text Me One', sans-serif;
 }
 
-.bg-opaque {
-    background-color:rgba(204, 204, 204, 0.5);
-}
-
 .bg-opaque-dark {
-    background: rgba(41, 41, 41, 0.9);
+    background: rgba(41, 41, 41, 0.95);
 }
 
 .neon {

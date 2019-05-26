@@ -6,7 +6,7 @@ var questionTime = 15;
 var trivia = {
     // Javascript questions
     javascriptQuiz: [{
-        question: "In JavaScript, how can you get the total number of arguements passed to a function",
+        question: "In JavaScript, how can you get the total number of arguments passed to a function",
         choices: ["Using the args.length property", "Using the arguments.length property", "Using the arr.length property", "Using the object.length property"],
         answer: 1
     }, {
