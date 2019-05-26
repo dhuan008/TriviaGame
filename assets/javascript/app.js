@@ -1,9 +1,10 @@
 // Global Variables
 // Time for each question
-var questionTime = 5;
+var questionTime = 15;
 
 // Trivia Game Object
 var trivia = {
+    // Javascript questions
     javascriptQuiz: [{
         question: "In JavaScript, how can you get the total number of arguements passed to a function",
         choices: ["Using the args.length property", "Using the arguments.length property", "Using the arr.length property", "Using the object.length property"],
@@ -26,6 +27,7 @@ var trivia = {
         answer: 3
     }],
 
+    // Into to Computer Security Questions
     securityQuiz: [{
         question: "With DEP(Data Execution Prevention) defense enabled, which of the following becomes impossible?",
         choices: ["Overwriting the return address on the stack", "Injecting shellcode onto the stack and execute it by jumping to it", "Finding a useful gadget to jump to in Return Oriented Programming", "Overwriting a function pointer on the stack"],
@@ -60,14 +62,14 @@ var trivia = {
     quizLength: 0,
 
     // Methods
-    // Determines which quiz to take
+    // Determines which quiz to take and updates question
     updateQuiz: function () {
         
         if (trivia.quizType == "security") {
             // Updates current quiz question object
             trivia.thisItem = trivia.securityQuiz[trivia.current];
 
-            // Only update quiz lenght once
+            // Only update quiz length once
             if (trivia.current == 0) {
                 // Stores the quiz length
                 trivia.quizLength = trivia.securityQuiz.length;
@@ -77,13 +79,12 @@ var trivia = {
             // Updates current quiz question object
             trivia.thisItem = trivia.javascriptQuiz[trivia.current];
 
-            // Only update quiz lenght once
+            // Only update quiz length once
             if (trivia.current == 0) {
                 // Stores the quiz length
                 trivia.quizLength = trivia.javascriptQuiz.length;
             }
         }
-
     },
 
     // Prepares the screen and starts the game
@@ -105,7 +106,9 @@ var trivia = {
         $("#results").empty().addClass("d-none");
     },
 
+    // Displays question to ask
     ask: function () {
+        // Update the question 
         trivia.updateQuiz();
 
         // Checks if there are still questions remaining in the array
@@ -243,19 +246,20 @@ var trivia = {
 // Shorthand document ready
 $(function () {
 
+    // Start quiz when clicked
     $("#start").on('click', function () {
         trivia.start();
     });
 
+    // Select which quiz to take
     $("#menu").on("click", "button", function () {
         trivia.quizType = $(this).data("type");
-        //console.log(trivia.quizType);
-    })
+    });
 
+    // Get user choice and evaluate it
     $("#choices").on("click", "button", function () {
         trivia.userChoice = $(this).data("id");
 
         trivia.evaluate();
-
     });
 });
