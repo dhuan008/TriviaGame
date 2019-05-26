@@ -64,7 +64,7 @@ var trivia = {
     // Methods
     // Determines which quiz to take and updates question
     updateQuiz: function () {
-        
+
         if (trivia.quizType == "security") {
             // Updates current quiz question object
             trivia.thisItem = trivia.securityQuiz[trivia.current];
@@ -117,7 +117,7 @@ var trivia = {
             $("#timer").html("Time remaining: " + trivia.timeLeft + " seconds");
 
             // Displays the current question
-            $("#question").html(trivia.thisItem.question);
+            $("#question").html(trivia.thisItem.question).addClass("text-center");
 
             // Array to hold options to choose from
             var choiceArr = trivia.thisItem.choices;
@@ -137,32 +137,36 @@ var trivia = {
         }
         // Else display the results of the quiz
         else {
-            // Hide the Game Box
-            $("#toShow").addClass("d-none");
-
-            // Div to hold results
-            var results = $('<div>');
-
-            // Number of unanswered questions
-            var unanswered = trivia.quizLength - (trivia.correct + trivia.wrong);
-
-            // Add data to results
-            results.addClass("text-center mb-3 py-3 border border-light");
-            results.append("Correct: " + trivia.correct);
-            results.append("<br>Wrong: " + trivia.wrong);
-            results.append("<br>Unanswered: " + unanswered);
-
-            // Append results to results div and show
-            $("#results").append(results).removeClass("d-none");
-
-            // Change start button text to restart and show it
-            $("#start .btn").text("Restart");
-            $("#start").show();
-
-            // Show quiz selector
-            $("#menu").show();
+            trivia.displayResults();
         }
+    },
 
+    // Display Results
+    displayResults: function () {
+        // Hide the Game Box
+        $("#toShow").addClass("d-none");
+
+        // Div to hold results
+        var results = $('<div>');
+
+        // Number of unanswered questions
+        var unanswered = trivia.quizLength - (trivia.correct + trivia.wrong);
+
+        // Add data to results
+        results.addClass("text-center mb-3 py-3 border border-light");
+        results.append("Correct: " + trivia.correct);
+        results.append("<br>Wrong: " + trivia.wrong);
+        results.append("<br>Unanswered: " + unanswered);
+
+        // Append results to results div and show
+        $("#results").append(results).removeClass("d-none");
+
+        // Change start button text to restart and show it
+        $("#start .btn").text("Restart");
+        $("#start").show();
+
+        // Show quiz selector
+        $("#menu").show();
     },
 
     // Increments to the next function
