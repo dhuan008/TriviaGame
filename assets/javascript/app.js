@@ -234,6 +234,9 @@ var trivia = {
         }
         // Else display the results of the quiz
         else {
+            // Removes previous game results and hides
+            $("#results").empty().addClass("d-none");
+            
             trivia.displayResults();
         }
     },
