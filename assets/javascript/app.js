@@ -66,7 +66,7 @@ var trivia = {
         answer: 1
     }, {
         question: "JavaScript is an __________ language.",
-        choices: ["european", "ISP", "compiled", "interpreted"],
+        choices: ["European", "ISP", "compiled", "interpreted"],
         answer: 3
     }, {
         question: "If p is not defined, what would be the result of console.log(p)?",
@@ -93,7 +93,7 @@ var trivia = {
     // Into to Computer Security Questions
     securityQuiz: [{
         question: "With DEP(Data Execution Prevention) defense enabled, which of the following becomes impossible?",
-        choices: ["Overwriting the return address on the stack", "Injecting shellcode onto the stack and execute it by jumping to it", "Finding a useful gadget to jump to in Return Oriented Programming", "Overwriting a canary on the stack"],
+        choices: ["Overwriting the return address on the stack", "Injecting shellcode onto the stack and executing it", "Finding a useful gadget to jump to in Return Oriented Programming", "Overwriting a canary on the stack"],
         answer: 1
     }, {
         question: "What does the acronyom (BROP) stand for? (In the context of computer security)",
@@ -104,7 +104,7 @@ var trivia = {
         choices: ["EBP", "EAX", "ESP", "EDC"],
         answer: 2
     }, {
-        question: "Which of the following decribes a denial of service attack?",
+        question: "Which of the following describes a denial of service attack?",
         choices: ["It cannot be detected", "It always happens over a network", "It can stop users from accessing a webserver", "It cannot happen over a network"],
         answer: 2
     }, {
@@ -351,6 +351,16 @@ var trivia = {
         }
         else if (trivia.quizType == "html") {
             $("#quizTitle").text("HTML Quiz");
+        }
+
+        // If shown, hides the result box when another quiz is selected
+        if (!$("#results").hasClass("d-none")) {
+            $("#results").addClass("d-none");
+        }
+
+        // Change start button text to start when a quiz is selected
+        if ($("#start .btn").text() == "Restart") {
+            $("#start .btn").text("Start");
         }
     },
 
