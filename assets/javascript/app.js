@@ -30,13 +30,13 @@ var trivia = {
         choices: ["True", "False"],
         answer: 1
     }, {
-        question: "How do you insert a copyright symbol on a browser page?",
-        choices: ["&copy", "&#196", "&copyright"],
-        answer: 0
-    }, {
         question: "Can a single text link point to two different web pages?",
         choices: ["Yes", "No"],
         answer: 1
+    }, {
+        question: "How does a image map link to multiple web pages/places?",
+        choices: ["Dividing the image into multiple coordinates each with a shape and it's own link", "Using lots of images lined up together", "It can't link to multiple pages"],
+        answer: 0
     }, {
         question: "Default size for a text field is around _______ characters",
         choices: ["14", "26", "12", "13"],
@@ -375,7 +375,6 @@ var trivia = {
 
 // Shorthand document ready
 $(function () {
-
     // Start quiz when clicked
     $("#start .btn").on('click', function () {
         trivia.start();
